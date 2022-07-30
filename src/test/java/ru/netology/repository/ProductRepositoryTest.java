@@ -40,6 +40,16 @@ public class ProductRepositoryTest {
     }
 
     @Test
+    public void shouldNotSaveProductDouble() {
+
+
+        Assertions.assertThrows(AlreadyExistsException.class, () -> {
+            repo.save(product1);
+        });
+
+    }
+
+    @Test
     public void shouldReturnAllProducts() {
 
         Product[] expected = {product1, product2, product3, product4, product5, product6};
@@ -57,7 +67,7 @@ public class ProductRepositoryTest {
     }
 
     @Test
-    public void shouldRemoveByIdAboveLength() {
+    public void shouldNotRemoveByIdAboveLength() {
 
         Assertions.assertThrows(NotFoundException.class, () -> {
             repo.removeById(9);
